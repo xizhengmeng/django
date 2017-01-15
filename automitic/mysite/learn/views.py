@@ -7,6 +7,7 @@ from DIY.createui import getCreatedStringWithProperties
 from DIY.packServer import packagiOS,getbranchesI,getbranchesA,packAndorid,changeToOnlineI,changeToOfflineI
 from django.http import HttpResponseRedirect
 from DIY.mail import sendMail
+from DIY.APIServer import getfilecontent,writecontent
 import shutil
 import logging
 import commands,time
@@ -30,6 +31,9 @@ def uicreate(request):
 
 def webserver(request):
     return render(request,'WebServer.html')
+
+def webserverfullre(request):
+    return render(request,'WebServerFull.html')
 
 def createui(request):
     string = request.GET['text']
@@ -86,7 +90,7 @@ def ajaxpack(request):
            f1.write(text1)
            f1.close()
 
-           mvoeTargetFile()
+           mvoeTargetFile(branchName + '***' + folderName)
 
            pullBranch('/Users/wxg/Documents/JDJRAPPAndroid' + '\n' + branchName)
 
@@ -227,7 +231,7 @@ def pullBranch(dir):
 
           f1.close()
 
-def mvoeTargetFile():
+def mvoeTargetFile(string):
 
     filePathF = '/Users/wxg/Documents/upload/'
     fileList = os.listdir(filePathF)
@@ -235,7 +239,10 @@ def mvoeTargetFile():
     filePath = '/Users/wxg/Documents/JDJRAPPAndroid/JDJR/libs/'
     filePathN = filePath + 'armeabi/'
 
+    f = open('/Users/wxg/Documents/Build/uploadlog.txt','a')
+
     for fileName in fileList:
+        f.write(fileName + '\n')
         targetPath = filePath + fileName
         targetPathN = filePathN + fileName
 
@@ -249,6 +256,16 @@ def mvoeTargetFile():
 
         shutil.move(filePathF + fileName,filePahtEnd + fileName)
 
+    begin = datetime.datetime.now()
+    hour = begin.hour + 8
+    day = begin.day
+    if hour > 24:
+       hour = hour - 24
+       day = day + 1
+
+    timeStr = '%dM%.dD%.dH%.dM' % (begin.month, day, hour,begin.minute)
+    f.write(string +'***'+ timeStr + '\n\n')
+    f.close()
 
 def ajaxgetbranchesfuncI(request):
     return HttpResponse(getbranchesI('string'))
@@ -516,3 +533,14 @@ def getUrl7(request):
     else:
         return HttpResponse('please give an name')
 
+
+def getcontentstring(request):
+    print 'heihei'
+    text = getfilecontent()
+    return HttpResponse(text)
+
+
+def writestring(request):
+    text = request.GET.get('string')
+    answer = writecontent(text)
+    return HttpResponse(answer)

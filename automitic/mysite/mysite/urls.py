@@ -40,13 +40,16 @@ urlpatterns = [
                url(r'interfaceTestClick', learn_views.interfaceTest),
                url(r'blockClick', learn_views.blockClickview),
                url(r'webserver', learn_views.webserver),
+               url(r'fullnewweb', learn_views.webserverfullre),
                url(r'url1', learn_views.getUrl1),
                url(r'url2', learn_views.getUrl2),  # new
                url(r'url3', learn_views.getUrl3),
                url(r'url4', learn_views.getUrl4),
                url(r'url5', learn_views.getUrl5),  # new
                url(r'url6', learn_views.getUrl6),
-               url(r'url7', learn_views.getUrl7)
+               url(r'url7', learn_views.getUrl7),
+               url(r'getcontent', learn_views.getcontentstring),
+               url(r'writecontent', learn_views.writestring),
                ]
 
 # ... the rest of your URLconf goes here ...
