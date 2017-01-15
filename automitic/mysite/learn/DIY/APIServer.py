@@ -18,3 +18,17 @@ def writecontent(string):
         return 'done'
     else:
         return 'error for json'
+
+
+
+def checkfile(string):
+    filePath = '/Users/wxg/Desktop/ceshi'
+    filelist = os.listdir(filePath)
+    string = ''
+    for item in filelist:
+        string = string + item + '+'
+
+    return string
+
+def createfordername(string):
+    return 'waha'

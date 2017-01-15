@@ -7,7 +7,7 @@ from DIY.createui import getCreatedStringWithProperties
 from DIY.packServer import packagiOS,getbranchesI,getbranchesA,packAndorid,changeToOnlineI,changeToOfflineI
 from django.http import HttpResponseRedirect
 from DIY.mail import sendMail
-from DIY.APIServer import getfilecontent,writecontent
+from DIY.APIServer import getfilecontent,writecontent,checkfile,createfordername
 import shutil
 import logging
 import commands,time
@@ -544,3 +544,13 @@ def writestring(request):
     text = request.GET.get('string')
     answer = writecontent(text)
     return HttpResponse(answer)
+
+
+def checkfilelist(request):
+    name = request.GET.get('fordername')
+    text = checkfile(name)
+    return HttpResponse(text)
+
+def createforder(request):
+    text = checkfile()
+    return HttpResponse(text)
