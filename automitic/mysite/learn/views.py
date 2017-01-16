@@ -7,7 +7,7 @@ from DIY.createui import getCreatedStringWithProperties
 from DIY.packServer import packagiOS,getbranchesI,getbranchesA,packAndorid,changeToOnlineI,changeToOfflineI
 from django.http import HttpResponseRedirect
 from DIY.mail import sendMail
-from DIY.APIServer import getfilecontent,writecontent,checkfile,createfordername
+from DIY.APIServer import getfilecontent,writecontent,checkfile,createfolder
 import shutil
 import logging
 import commands,time
@@ -535,22 +535,25 @@ def getUrl7(request):
 
 
 def getcontentstring(request):
-    print 'heihei'
-    text = getfilecontent()
+    filename = request.GET.get('filename')
+    text = getfilecontent(filename)
     return HttpResponse(text)
 
 
 def writestring(request):
-    text = request.GET.get('string')
-    answer = writecontent(text)
+    content = request.GET.get('content')
+    foldername = request.GET.get('foldername')
+    filename = request.GET.get('filename')
+    answer = writecontent(content,foldername,filename)
     return HttpResponse(answer)
 
 
 def checkfilelist(request):
-    name = request.GET.get('fordername')
+    name = request.GET.get('foldername')
     text = checkfile(name)
     return HttpResponse(text)
 
 def createforder(request):
-    text = checkfile()
+    foldername = request.GET.get('foldername')
+    text = createfolder(foldername)
     return HttpResponse(text)

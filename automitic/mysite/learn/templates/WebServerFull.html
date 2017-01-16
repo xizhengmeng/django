@@ -9,20 +9,18 @@
 <div id="title">APIN Server</div>
 
 <div id="buttons">
-    <input type="inputtext">
+    <input type="inputtext" id="foldername">
     <input type="button" value="查询" id="check">
-    <input type="button" value="创建" id="create">
+    <!--<input type="button" value="创建" id="create">-->
 </div>
 
 <div id="files">
-    <input type="button" value="查询">
-    <input type="button" value="创建">
+
 </div>
 
 <div id="content">
     <textarea id="textarea1" placeholder="请填入属性列表"></textarea>
     <input type="button" value="插入" id="insert">
-    <input type="button" value="读取" id="read">
 </div>
 
 </body>
@@ -33,20 +31,33 @@
 
     needDownCount = true;
     goon = true;
+    foldername = ''
+    filename = ''
 
     $(document).ready(function(){
         $("#check").click(function () {
             alert('check')
-            $.get("/getforderlist/", {'fordername': 'hanshenghui'},function(ret){
-                alert(ret)
+            folder = $("#foldername").val()
+            if (folder.length == 0) {
+                alert('请输入查询的用户名')
+                return
+            }
+
+            foldername = folder
+
+            $.get("/getforderlist/", {'foldername': foldername},function(ret){
+                if (ret == 'none'){
+                    alert('用户不存在不存在请创建新用户')
+                }
+
                 ret = ret.split("+")
-//                alert(ret)
                 var optionstring = "";
-                var numbers=new Array("0","1","2","3","4","5","6","7","8")
                 for (var i in ret) {
                     var jsonObj = ret[i]
-//                    optionstring += "<input type=\"button\" value=\"" + jsonObj + "\" id=\"read\"  >";
-//                    var btn=$("<input type='button' id=\'" + idText + "\' value=\'" + jsonObj + "\'>");
+                    if (jsonObj.length == 0) {
+                        return
+                    }
+
                     if (i == 0) {
                         var btn=$("<input type='button' id='0' value=\'" + jsonObj + "\'>");
                         $("#files").append(btn);
@@ -80,47 +91,46 @@
                         $("#files").append(btn);
                         addBtnEvent('7');
                     }
-
-
-
                 }
-//                $("#files").html(optionstring);
-
-//                var btn=$("<input type='button' id='testBtn' value='Test'>");
-//                $("#files").append(btn);
-
             })
         });
 
         $("#create").click(function () {
+            folder = $("#foldername").val()
+            if (folder.length == 0) {
+                alert('请输入用户名')
+            }
+
+            $.get("/createforder/", {'foldername': folder},function(ret){
+                alert(ret)
+
+            })
 
         });
 
         $("#read").click(function(){
-            alert("wass")
-//            var $this = $(this);
-//            alert($this.val())
+
             $.get("/getcontent/", {'branch': 'hanshenghui'},function(ret){
-                alert(ret)
                 $('#textarea1').html(ret)
             })
         });
 
         $("#insert").click(function(){
-            alert('lala')
             text =  $('#textarea1').val()
-            $.get("/writecontent/", {'string': text},function(ret){
+            $.get("/writecontent/", {'content': text,'foldername':foldername,'filename':filename},function(ret){
                 alert(ret)
-//                $('#textarea1').html(ret)
             })
         });
     });
 
     function addBtnEvent(id){
         $("#"+id).bind("click",function(){
-//            alert("Test");
             var $this = $(this);
-            alert($this.val())
+            filename = $this.val()
+            $('#textarea1').html('')
+            $.get("/getcontent/", {'filename': foldername + '+' + filename},function(ret){
+                $('#textarea1').val(ret)
+            })
         });
     }
 
@@ -143,7 +153,7 @@
 
 #files{
     background-color: gray;
-    height: 100px;
+    height: 30px;
     margin-top: 20px;
 }
 
