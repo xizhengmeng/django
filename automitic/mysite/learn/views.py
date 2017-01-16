@@ -11,8 +11,13 @@ from DIY.APIServer import getfilecontent,writecontent,checkfile,createfolder
 import shutil
 import logging
 import commands,time
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
 
-logger = logging.getLogger(__name__)
+#def some_view(request):
+    #...
+
+#logger = logging.getLogger(__name__)
 
 def home(request):
     string = '这是'
@@ -541,9 +546,9 @@ def getcontentstring(request):
 
 
 def writestring(request):
-    content = request.GET.get('content')
-    foldername = request.GET.get('foldername')
-    filename = request.GET.get('filename')
+    content = request.POST.get('content')
+    foldername = request.POST.get('foldername')
+    filename = request.POST.get('filename')
     answer = writecontent(content,foldername,filename)
     return HttpResponse(answer)
 

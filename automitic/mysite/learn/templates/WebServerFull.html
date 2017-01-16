@@ -21,6 +21,7 @@
 <div id="content">
     <textarea id="textarea1" placeholder="请填入属性列表"></textarea>
     <input type="button" value="插入" id="insert">
+    {% csrf_token %}
 </div>
 
 </body>
@@ -117,7 +118,7 @@
 
         $("#insert").click(function(){
             text =  $('#textarea1').val()
-            $.get("/writecontent/", {'content': text,'foldername':foldername,'filename':filename},function(ret){
+            $.post("/writecontent/", {'content': text,'foldername':foldername,'filename':filename},function(ret){
                 alert(ret)
             })
         });
