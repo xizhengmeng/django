@@ -141,6 +141,7 @@ def packAndorid(string):
 
 def getbranchesI(string):
     os.chdir('/Users/wxg/Documents/JDMobileNew')
+    os.popen('git fetch')
     cmdline = 'git branch -r'
     cmdout = os.popen(cmdline)
     #f = open('/Users/wxg/Desktop/branches.txt','r')
@@ -150,6 +151,7 @@ def getbranchesI(string):
 
 def getbranchesA(string):
     os.chdir('/Users/wxg/Documents/JDJRAPPAndroid')
+    os.popen('git fetch')
     cmd = 'git branch -r'
     cmdout = os.popen(cmd)
     return cmdout.read()
