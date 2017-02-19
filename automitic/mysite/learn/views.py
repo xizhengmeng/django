@@ -563,3 +563,7 @@ def createforder(request):
     foldername = request.GET.get('foldername')
     text = createfolder(foldername)
     return HttpResponse(text)
+
+def downloadipafunction(request):
+    url = request.GET.get('url')
+    return HttpResponseRedirect(url)
