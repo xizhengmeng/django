@@ -53,6 +53,8 @@
 
     needDownCount = true;
     goon = true;
+    
+    // self.location='jsonFormatClick1'
 
     $(document).ready(function(){
 //         $.ajax({
@@ -108,13 +110,11 @@
                   alert('当前有任务正在执行,请稍后执行新的任务')
                   needDownCount = false;
                   goon = false;
-               }else if(ret.indexOf("done") > 0 ){
+               }else if(ret.indexOf("done") >= 0 ){
                   str=ret.replace("done","");
-                  str = '10.13.87.32:8000/Documents/Build/' + str
-                  alert('打包成功请点击check result获取安装包')
-                  if (confirm("你确定提交吗？")) {  
-                     alert("点击了确定"); 
-                     self.location('downloadipa?url=str') 
+                  str = 'http://10.13.87.32:8000/Documents/Build/' + str + '/Payload.ipa'
+                  if (confirm("打包成功，获取安装包")) {  
+                     self.location=('downloadipa?url='+str) 
                   }  
                   else {  
                       alert("点击了取消");  
@@ -124,6 +124,10 @@
 
                }else if(ret == 'fail'){
                    alert('打包失败,联系开发人员')
+                   needDownCount = false;
+                   goon = false;
+               }else {
+                   alert('未知,联系开发人员')
                    needDownCount = false;
                    goon = false;
                }

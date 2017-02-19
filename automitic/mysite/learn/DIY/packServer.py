@@ -93,8 +93,9 @@ def packagiOS(string):
     os.remove('xrun.py')
 
     returnstring = 'done/iOS/%s' % string
+    print returnstring
 
-    return returnstrng
+    return returnstring
 
 def packAndorid(string):
 

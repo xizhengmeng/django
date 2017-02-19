@@ -175,8 +175,8 @@ def ajaxpack(request):
 
            timeStr = '%dM%.dD%.dH%.dM' % (begin.month, day, hour,begin.minute)
 
-           text = packagiOS(branchName + '**' + textOnline + '**' + folderName + '**' +timeStr)
-
+           textString = packagiOS(branchName + '**' + textOnline + '**' + folderName + '**' +timeStr)
+           print textString
            f2 = open('/Users/wxg/Documents/Build/building.txt','w')
            f2.write('')
            f2.close()
@@ -218,7 +218,7 @@ def ajaxpack(request):
               f.write(text + '\n' + string)
               f.close()
 
-           return HttpResponse('done')
+           return HttpResponse(textString)
 
 def pullBranch(dir):
     path = '/Users/wxg/Desktop/branches.txt'
