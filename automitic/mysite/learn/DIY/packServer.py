@@ -1,3 +1,4 @@
+#coding:utf-8
 import os,subprocess,sys,shutil
 from mod_pbxproj import XcodeProject
 import commands
@@ -26,8 +27,10 @@ def configProject():
                profile = setting.get('PROVISIONING_PROFILE')
                print codeSign
                print profile
-               setting.__setitem__('CODE_SIGN_IDENTITY','iPhone Distribution: Beijing Jingdong Century Trading Co., Ltd. (TQZTTUQ9ZE)')
-               setting.__setitem__('PROVISIONING_PROFILE','0d8cd55a-c922-4f27-b1aa-df6a2f277ea5')
+               # setting.__setitem__('CODE_SIGN_IDENTITY','iPhone Distribution: Beijing Jingdong Century Trading Co., Ltd. (TQZTTUQ9ZE)')
+               # setting.__setitem__('PROVISIONING_PROFILE','0d8cd55a-c922-4f27-b1aa-df6a2f277ea5')
+               setting.__setitem__('CODE_SIGN_IDENTITY','iPhone Developer: 秀刚 王 (F93GC5PGZ9)')       
+               setting.__setitem__('PROVISIONING_PROFILE','cb54ac69-0046-4465-869a-7d36b98233f1')
                item.__setitem__('buildSettings',setting)
 
         elif (nameIsa == 'PBXProject'):

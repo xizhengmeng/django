@@ -287,7 +287,8 @@ def sendMails(request):
     return HttpResponse('hi')  
 
 def jsonFormat1(request):
-    return HttpResponseRedirect('http://www.jsonparseronline.com')
+    # return HttpResponseRedirect('http://www.jsonparseronline.com')
+    return HttpResponseRedirect('http://10.13.87.32:8000/Documents/Build/iOS/JDMobile_1205_4.0.0%2A%2Aadvance%2A%2A%2A%2A2M15D14H49M')
 
 def jsonFormat2(request):
     return HttpResponseRedirect('http://www.sojson.com')    
