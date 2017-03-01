@@ -108,7 +108,7 @@ def ajaxpack(request):
 
            timeStr = '%dM%.dD%.dH%.dM' % (begin.month, day, hour,begin.minute)
 
-           text = packAndorid(branchName + '**' + textOnline +'**' + folderName + '**' + timeStr)
+           returnstring = packAndorid(branchName + '-' + textOnline +'-' + folderName + '-' + timeStr)
 
            f2 = open('/Users/wxg/Documents/Build/building.txt','w')
            f2.write('')
@@ -131,11 +131,10 @@ def ajaxpack(request):
               f.write(text + '\n' + string)
               f.close()
 
-           print text + 'cehsiaceshi'
            if text == 'failed':
               return HttpResponse('fail')
 
-           return HttpResponse('done')
+           return HttpResponse(returnstring)
        else:
 
            f1 = open('/Users/wxg/Documents/Build/building.txt','w')
@@ -175,7 +174,7 @@ def ajaxpack(request):
 
            timeStr = '%dM%.dD%.dH%.dM' % (begin.month, day, hour,begin.minute)
 
-           textString = packagiOS(branchName + '**' + textOnline + '**' + folderName + '**' +timeStr)
+           textString = packagiOS(branchName + '-' + textOnline + '-' + folderName + '-' +timeStr)
            print textString
            f2 = open('/Users/wxg/Documents/Build/building.txt','w')
            f2.write('')

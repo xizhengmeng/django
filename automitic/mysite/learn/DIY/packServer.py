@@ -146,6 +146,11 @@ def packAndorid(string):
           os.remove(pathReleaseT)
        shutil.copyfile(pathRelease,pathReleaseT)
 
+    # returnstring = pathDebugT1 + 'done'
+    # print pathDebugT1
+    # print 'ceshi'
+    return 'Android/' + string + 'done'
+
 def getbranchesI(string):
     os.chdir('/Users/wxg/Documents/JDMobileNew')
     os.popen('git fetch')

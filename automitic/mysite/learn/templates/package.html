@@ -111,13 +111,18 @@
                   needDownCount = false;
                   goon = false;
                }else if(ret.indexOf("done") >= 0 ){
-                  str=ret.replace("done","");
-                  str = 'http://10.13.87.32:8000/Documents/Build/' + str + '/Payload.ipa'
+                  str=ret.replace("done","");                  
+                  if (str.indexOf('Android') >= 0 ) {
+                     str = 'http://10.13.87.32:8000/Documents/Build/' + str + '/JDJR-debug.apk'
+                  }else {
+                     str = 'http://10.13.87.32:8000/Documents/Build/' + str + '/Payload.ipa'
+                  }
+
                   if (confirm("打包成功，获取安装包")) {  
                      self.location=('downloadipa?url='+str) 
                   }  
                   else {  
-                      alert("点击了取消");  
+                      alert("请稍后点击checkresult");  
                   } 
                   needDownCount = false;
                   goon = true;
