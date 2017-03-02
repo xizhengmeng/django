@@ -289,7 +289,7 @@ def jsonFormat1(request):
     return HttpResponseRedirect('http://www.jsonparseronline.com')
 
 def jsonFormat2(request):
-    return HttpResponseRedirect('http://www.sojson.com')    
+    return HttpResponseRedirect('http://http://www.bejson.com')    
 
 def interfaceTest(request):
     return HttpResponseRedirect('http://www.atool.org/httptest.php')
