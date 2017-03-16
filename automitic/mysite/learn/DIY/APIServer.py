@@ -52,7 +52,7 @@ def createfolder(string):
 
     os.chdir(finalFilePath)
 
-    for i in range(1,8):
+    for i in range(1,10):
         filename = 'text%i.txt' % i
         finalFilePathName = finalFilePath + '/' + filename
         f = open(finalFilePathName,'w')

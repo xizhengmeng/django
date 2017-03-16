@@ -20,7 +20,7 @@
 
 <div id="content">
     <textarea id="textarea1" placeholder="请输入接口内容"></textarea>
-    <input type="button" value="插入" id="insert">
+    <input type="button" value="保存" id="insert">
     {% csrf_token %}
 </div>
 
@@ -50,7 +50,7 @@
                 if (ret == 'none'){
                     alert('用户不存在不存在请创建新用户')
                 }
-
+                $("#files").empty();
                 ret = ret.split("+")
                 var optionstring = "";
                 for (var i in ret) {
@@ -91,6 +91,14 @@
                         var btn=$("<input type='button' id='7' value=\'" + jsonObj + "\'>");
                         $("#files").append(btn);
                         addBtnEvent('7');
+                    }else if(i == 8) {
+                        var btn=$("<input type='button' id='8' value=\'" + jsonObj + "\'>");
+                        $("#files").append(btn);
+                        addBtnEvent('8');
+                    }else if(i == 9) {
+                        var btn=$("<input type='button' id='9' value=\'" + jsonObj + "\'>");
+                        $("#files").append(btn);
+                        addBtnEvent('9');
                     }
                 }
             })
